@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export default class Product extends React.Component {
   constructor(props){
-    super()
+    super(props)
   }
   render(){
     return (
@@ -28,10 +28,26 @@ Product.propTypes = {
   producer: PropTypes.string,
   hasWatermark: PropTypes.bool,
   color: PropTypes.oneOf(['white', 'eggshell-white','salmon']).isRequired,
-  weight: PropTypes.number.isRequired
+  weight: validateWeight//PropTypes.number.isRequired
 
 }
 
+function validateWeight(props, propName, compnentName){
+  if(!props.weight){
+    return new Error("Must have weight")
+  }
+  if(typeof(props.weight)!= "number"){
+    return new Error("Must be a number")
+  }
+  if(props.weight<80 || props.weight > 300){
+    return new Error("Weight must be bewteen 80 and 300")
+  }
+  if(props.weight<80 || props.weight > 300){
+    return new Error("Weight must be bewteen 80 and 300")
+  }
+
+
+}
 // Order.propTypes = {
 //   cone: PropTypes.bool,
 //   size: PropTypes.string,
